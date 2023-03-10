@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import turtle
 
 
 def booking(loginid, password):
@@ -24,7 +25,9 @@ def booking(loginid, password):
 
 
 def main():
-    booking('123@mail.com', 'passcode')
+    loginid = turtle.textinput("Credentials", "LoginID")
+    password = turtle.textinput("Credentials", "password") 
+    booking(loginid, password)
     
 
 if __name__ == "__main__":
