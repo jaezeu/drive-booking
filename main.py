@@ -26,8 +26,9 @@ def booking(loginid, password):
 
 def main():
     loginid = turtle.textinput("Credentials", "LoginID")
-    password = turtle.textinput("Credentials", "password") 
-    booking(loginid, password)
+    password = turtle.textinput("Credentials", "password")
+    if len(loginid) > 1 and len(password) > 1:
+        booking(loginid, password)
     
 
 if __name__ == "__main__":
