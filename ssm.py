@@ -4,6 +4,13 @@ import time
 import turtle
 import boto3
 
+ssm = boto3.client("ssm")
+
+def get_ssm_secret(parameter_name):
+    return ssm.get_parameter(
+        Name=parameter_name,
+        WithDecryption=True
+)
 
 def booking(loginid, password):
 
@@ -14,15 +21,20 @@ def booking(loginid, password):
     driver.find_element(By.ID, 'input-8').send_keys(loginid)
     driver.find_element(By.ID, 'input-15').send_keys(password)
     driver.find_element(By.CSS_SELECTOR, "button.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary").click()
-    driver.implicitly_wait(30) #wait up to 30 seconds to wait for page to load
+    driver.implicitly_wait(30)
     driver.find_element(By.XPATH, "//a[@href='#/booking']").click()
+    driver.implicitly_wait(30)
+    driver.find_element(By.XPATH, "//*[contains(text(), 'Practical ')]").click()
+    driver.implicitly_wait(30)
+    driver.find_element(By.CSS_SELECTOR, "button.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary").click()
+    driver.implicitly_wait(30)
     time.sleep(5)
     # elif():
 
 
 def main():
-    loginid = turtle.textinput("Credentials", "LoginID")
-    password = turtle.textinput("Credentials", "password")
+    loginid = get_ssm_secret("bbdc_login").get("Parameter").get("Value")
+    password = get_ssm_secret("bbdc_pw").get("Parameter").get("Value")
     if len(loginid) > 1 and len(password) > 1:
         booking(loginid, password)
     
