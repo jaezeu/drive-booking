@@ -23,11 +23,12 @@ def booking(loginid, password):
     driver.find_element(By.CSS_SELECTOR, "button.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary").click()
     driver.implicitly_wait(30)
     driver.find_element(By.XPATH, "//a[@href='#/booking']").click()
-    driver.implicitly_wait(30)
+    time.sleep(3)
     driver.find_element(By.XPATH, "//*[contains(text(), 'Practical ')]").click()
     driver.implicitly_wait(30)
-    driver.find_element(By.CSS_SELECTOR, "button.v-btn.v-btn--is-elevated.v-btn--has-bg.theme--light.v-size--default.primary").click()
-    driver.implicitly_wait(30)
+    time.sleep(3)
+    driver.find_element(By.CSS_SELECTOR, "span.v-btn__content").click()
+    # driver.implicitly_wait(30)
     time.sleep(5)
     # elif():
 
